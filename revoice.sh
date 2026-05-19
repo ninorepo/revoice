@@ -28,11 +28,11 @@ $lib/concat_render.sh
 #$lib/render.sh
 #$lib/render_faster.sh
 
-#$lib/extract_audio.sh "$project_path/scene.mp4" "$project_path/final.m4a"
+$lib/extract_audio.sh "$project_path/scene.mp4" "$project_path/final.m4a"
 
 # generate summary.srt from summary.mp3
-#$lib/generate_srt.sh "$project_path/final.m4a" "$project_path/temp.srt"
-#$lib/nsubsplit.sh "$project_path/temp.srt" 3 > "$project_path/final.srt"
+$lib/generate_srt.sh "$project_path/final.m4a" "$project_path/scene.srt"
+$lib/nsubsplit.sh "$project_path/scene.srt" 3 > "$project_path/final.srt"
 
-#$lib/burn_subs.sh "$project_path/scene.mp4" "$project_path/final.srt" "$project_path/final.mp4"
+$lib/burn_subs.sh "$project_path/scene.mp4" "$project_path/final.srt" "$project_path/final.mp4"
 
