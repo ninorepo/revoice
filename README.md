@@ -1,2 +1,2 @@
 # revoice
-Summarize lot video into youtube shorts. Done using openai.
+Summarize long video into youtube shorts. Done using openai.
