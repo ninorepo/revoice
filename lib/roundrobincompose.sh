@@ -217,14 +217,13 @@ ffmpeg -y \
     -vf "subtitles='${SUBTITLE}':fontsdir='${FONT_DIR}':force_style='${ASS_STYLE}'" \
     -map 0:v \
     -map 1:a \
-    -t "$AUDIO_DURATION" \
     -c:v libx264 \
     -preset veryfast \
     -crf 23 \
     -c:a aac \
     -shortest \
     "$OUTPUT"
-
+#-t "$AUDIO_DURATION" \
 echo ""
 echo "Done:"
 echo "$OUTPUT"
