@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 API_KEY="${OPENAI_API_KEY}"
@@ -7,7 +8,7 @@ OUTPUT="$2"
 PROMPT_FILE="$global_path/prompt/prompt.txt"
 
 if [ -z "$TOPIC" ]; then
-    echo "Don't leave TOPIC empty"
+    echo "Don't let TOPIC to be empty"
     exit 1
 fi
 
@@ -22,10 +23,11 @@ if [[ -e "$OUTPUT" ]]; then
 fi
 
 PROMPT=$(cat "$PROMPT_FILE")
+
 FULL_PROMPT="$PROMPT
 
-VIDEO TOPIC :
-$TOPIC"
+TOPIC:
+$INSTRUCTION
 
 JSON=$(jq -n \
     --arg chat "$CHAT" \
@@ -48,4 +50,3 @@ curl "$HOST"/chat/completions \
     -H "Content-Type: application/json" \
     -d "$JSON" \
 | jq  -r '.choices[0].message.content' > "$OUTPUT"
-exit 0

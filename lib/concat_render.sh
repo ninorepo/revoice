@@ -26,46 +26,23 @@ WIDTH=1080
 HEIGHT=1920
 FPS=30
 
-SPEED=1.2
+SPEED=1.22
 TOLERANCE=2
 
-PRESET="ultrafast"
+PRESET="slow"
 CRF=23
 
 # ========================
 # AUDIO SPEED PROCESS & TRANSFORMATION : avoid content ID
 # ========================
 echo "Processing audio..."
-# SAFE subtle voice randomization
-# No echo
-# No pitch change
-# No duration change
 
-BASS=$(awk 'BEGIN{srand(); printf "%.1f", -1 + rand()*3}')
-TREBLE=$(awk 'BEGIN{srand(); printf "%.1f", -1 + rand()*3}')
-LOWPASS=$(awk 'BEGIN{srand(); printf "%d", 8500 + rand()*2500}')
-HIGHPASS=$(awk 'BEGIN{srand(); printf "%d", 60 + rand()*40}')
-WIDTH=$(awk 'BEGIN{srand(); printf "%.2f", 0.90 + rand()*0.20}')
-
-echo "bass=$BASS"
-echo "treble=$TREBLE"
-echo "lowpass=$LOWPASS"
-echo "highpass=$HIGHPASS"
-echo "width=$WIDTH"
 
 #if [ "$SPEED" != "1.0" ]; then
 
     ffmpeg -y \
       -i "$AUDIO" \
-      -filter:a "atempo=$SPEED,
-	  highpass=f=${HIGHPASS},
-	lowpass=f=${LOWPASS},
-	bass=g=${BASS},
-	treble=g=${TREBLE},
-	stereotools=mlev=${WIDTH},
-	acompressor=threshold=-18dB:ratio=2,
-	loudnorm
-	" \
+      -filter:a "atempo=$SPEED" \
       "$WORKDIR/audio.wav"
 
     AUDIO_FINAL="$WORKDIR/audio.wav"
